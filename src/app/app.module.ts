@@ -14,13 +14,20 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RetloginPage } from '../pages/retlogin/retlogin';
 import { PloginPage } from '../pages/plogin/plogin';
-import { HomePage} from '../pages/home/home';
+import { TabhPage} from '../pages/tabh/tabh';
+import { YourItemsPage} from '../pages/your-items/your-items';
+import { EditHistoryPage} from '../pages/edit-history/edit-history';
+
+
+
 
 
 
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { HomePage } from '../pages/home/home';
+
 
  var firebaseAuth = {
     apiKey: "AIzaSyBXx54N7DAKc6v9RE52P4Qcf0ckpkzf1yU",
@@ -41,7 +48,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     RegisterPage,
     RetloginPage,
     PloginPage,
-    HomePage
+    TabhPage
+    
    
     
   ],
@@ -61,7 +69,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     RegisterPage,
     RetloginPage,
     PloginPage,
-    HomePage
+    TabhPage
     
     
   ],

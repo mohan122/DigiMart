@@ -7,6 +7,7 @@ import { ListPage } from '../pages/list/list';
 import { RetloginPage } from '../pages/retlogin/retlogin';
 
 
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -34,7 +35,7 @@ export class MyApp {
       { title: 'Hello Ionic', component: HelloIonicPage },
       { title: 'My First List', component: ListPage },
       { title: 'Retail page',component: RetloginPage},
-    
+      
    
       
 

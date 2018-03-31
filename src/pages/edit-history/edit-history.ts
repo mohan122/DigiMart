@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { RegisterPage } from '../register/register'; 
-import { MapsPage} from '../maps/maps';
+import { LoginPage } from '../login/login';
 
 /**
- * Generated class for the PloginPage page.
+ * Generated class for the EditHistoryPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -12,21 +11,19 @@ import { MapsPage} from '../maps/maps';
 
 @IonicPage()
 @Component({
-  selector: 'page-plogin',
-  templateUrl: 'plogin.html',
+  selector: 'page-edit-history',
+  templateUrl: 'edit-history.html',
 })
-export class PloginPage {
+export class EditHistoryPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
-  Register() {
-    this.navCtrl.push(RegisterPage);
-}
-Map() {
-  this.navCtrl.setRoot(MapsPage);
-}
+  Logout(){
+    this.navCtrl.setRoot(LoginPage);
+  }
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PloginPage');
+    console.log('ionViewDidLoad EditHistoryPage');
   }
 
 }

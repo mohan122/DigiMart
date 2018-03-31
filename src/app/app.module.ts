@@ -3,6 +3,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Geolocation } from '@ionic-native/geolocation';
+import { FormBuilder,FormGroup} from '@angular/forms';
 
 
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
@@ -17,7 +18,12 @@ import { PloginPage } from '../pages/plogin/plogin';
 import { TabhPage} from '../pages/tabh/tabh';
 import { YourItemsPage} from '../pages/your-items/your-items';
 import { EditHistoryPage} from '../pages/edit-history/edit-history';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
+
+import { GoogleMaps } from '@ionic-native/google-maps';
+import { HttpClientModule } from '@angular/common/http';
+import {HomePage} from '../pages/home/home';
 
 
 
@@ -26,7 +32,11 @@ import { EditHistoryPage} from '../pages/edit-history/edit-history';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { HomePage } from '../pages/home/home';
+import { MapsPage } from '../pages/maps/maps';
+
+import { AgmCoreModule } from '@agm/core';
+import { GeocoderProvider } from '../providers/geocoder/geocoder';
+
 
 
  var firebaseAuth = {
@@ -48,7 +58,11 @@ import { HomePage } from '../pages/home/home';
     RegisterPage,
     RetloginPage,
     PloginPage,
-    TabhPage
+    TabhPage,
+    MapsPage,
+    HomePage,
+    YourItemsPage,
+    EditHistoryPage
     
    
     
@@ -56,8 +70,13 @@ import { HomePage } from '../pages/home/home';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpClientModule,
     AngularFireModule.initializeApp(firebaseAuth),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AgmCoreModule.forRoot({
+      apiKey:'AIzaSyDeMjFd459tC-fSBnQ4fLhxHnLxd7b1I5E'
+    })
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -69,7 +88,11 @@ import { HomePage } from '../pages/home/home';
     RegisterPage,
     RetloginPage,
     PloginPage,
-    TabhPage
+    TabhPage,
+    MapsPage,
+    HomePage,
+    YourItemsPage,
+    EditHistoryPage
     
     
   ],
@@ -77,6 +100,9 @@ import { HomePage } from '../pages/home/home';
     StatusBar,
     SplashScreen,
     Geolocation,
+    GoogleMaps,
+    NativeGeocoder,
+    GeocoderProvider,
   
     {provide: ErrorHandler, useClass: IonicErrorHandler}
     

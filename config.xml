@@ -86,4 +86,14 @@
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
+    <plugin name="cordova-plugin-camera" spec="^4.0.2" />
+    <allow-navigation href="http://192.168.0.8:8100" />
+    <engine name="android" spec="~7.0.0" />
+    <engine name="browser" spec="~5.0.3" />
+    <plugin name="cordova-plugin-googlemaps" spec="^2.2.5">
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyAIONZtaj3wLt1L27aRH9ByRRbt8kzjHYA" />
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCC0deTMhQ3qshUfMEKz6RqkRgdySTKaEg" />
+        <variable name="LOCATION_WHEN_IN_USE_DESCRIPTION" value="This app wants to get your location while this app runs only." />
+        <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="This app wants to get your location always, even this app runs in background." />
+    </plugin>
 </widget>

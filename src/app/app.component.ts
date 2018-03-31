@@ -5,11 +5,11 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ListPage } from '../pages/list/list';
 import { RetloginPage } from '../pages/retlogin/retlogin';
-
-
-
+import { TabhPage} from '../pages/tabh/tabh';
+import { MapsPage} from '../pages/maps/maps';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AgmCoreModule } from '@agm/core';
 
 
 @Component({
@@ -35,6 +35,8 @@ export class MyApp {
       { title: 'Hello Ionic', component: HelloIonicPage },
       { title: 'My First List', component: ListPage },
       { title: 'Retail page',component: RetloginPage},
+      { title: 'Tabh Page',component:TabhPage},
+      { title: 'Maps Page',component:MapsPage},
       
    
       

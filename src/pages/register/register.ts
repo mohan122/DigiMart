@@ -40,14 +40,15 @@ export class RegisterPage {
       retypepassword:[''],
       category:[''],
       nameofshop:[''],
-      location:[''],
+      latitude:[''],
+      longitude:[''],
     });
   }
   
-  createEntry(name : string, mobile : number,password:string,retypepassword:string,nameofshop:string,category:string,location:string) : void
+  createEntry(name : string, mobile : number,password:string,retypepassword:string,nameofshop:string,category:string,latitude:number,longitude:number) : void
   {
      let headers 	: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
-         options 	: any		= { "key" : "create", "NAME" : name, "MOBILE" : mobile,"PASSWORD":password,"RETYPEPASSWORD":retypepassword,"CATEGORY":category,"SHOPNAME":nameofshop,"LOCATION":location },
+         options 	: any		= { "key" : "create", "NAME" : name, "MOBILE" : mobile,"PASSWORD":password,"RETYPEPASSWORD":retypepassword,"CATEGORY":category,"SHOPNAME":nameofshop,"latitude":latitude,"longitude":longitude },
          url       : any      	= this.baseURI ;
 
      this.http.post(url, JSON.stringify(options), headers)
@@ -70,10 +71,11 @@ export class RegisterPage {
          retypepassword:string=this.register.controls["retypepassword"].value,
          nameofshop         : string = this.register.controls["nameofshop"].value,
          category:string=this.register.controls["category"].value,
-        location         : string= this.register.controls["location"].value;
+        latitude:number=this.register.controls["latitude"].value,
+        longitude:number=this.register.controls["longitude"].value;
 
     
-        this.createEntry(name,mobile,password,retypepassword,nameofshop,category,location);
+        this.createEntry(name,mobile,password,retypepassword,nameofshop,category,latitude,longitude);
   }
 
  
@@ -114,7 +116,7 @@ this.geolocation.getCurrentPosition(options).then((location) => {
   console.log('Fetched the location successfully',location);
   this.location=location;
   this.latitude=location.coords.latitude;
-  this.longitude=location.coords.latitude;
+  this.longitude=location.coords.longitude;
 }).catch((error) => {
   console.log('Error getting location', error);
 });

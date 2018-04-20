@@ -3,7 +3,9 @@ import { IonicPage, NavController, NavParams ,Platform} from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AgmCoreModule } from '@agm/core';
 import { variable } from '@angular/compiler/src/output/output_ast';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {GoogleMap,GoogleMaps,LatLng,CameraPosition,GoogleMapsEvent} from '@ionic-native/google-maps';
+import { LoginssPage } from '../loginss/loginss';
 
 /*import {
   GoogleMaps,
@@ -34,14 +36,15 @@ export class MapsPage {
   disabled:boolean;
   position:any;
   map: GoogleMap;
-  
-  
+  private baseURI : string  = "http://localhost/vamsi/corda.php";
+  latitude:any;
+  longitude:any;
   
   
  // map: GoogleMap;
   
 
-  constructor(public navCtrl: NavController, public googleMaps:GoogleMaps,public navParams: NavParams,private geolocation: Geolocation,public platform:Platform) {
+  constructor(public navCtrl: NavController,public http: HttpClient, public googleMaps:GoogleMaps,public navParams: NavParams,private geolocation: Geolocation,public platform:Platform) {
     this.locatio=[{
        title:'V'
     }];
@@ -117,13 +120,23 @@ export class MapsPage {
 
       });
   }*/
+  
+
+saveEntr(){
+  this.navCtrl.push(LoginssPage);
+}
+
+
   mapUser(){
   this.platform.ready().then(()=>{
     let options={timeout:3000,enableHighAccuracy:true,maximumAge:0}
 this.geolocation.getCurrentPosition(options).then((location) => {
   console.log('Fetched the location successfully',location);
   this.location=location;
+  this.latitude=location.coords.latitude;
+  this.longitude=location.coords.longitude;
     this.disabled=true;
+   
 }).catch((error) => {
   console.log('Error getting location', error);
 });

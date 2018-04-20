@@ -40,8 +40,12 @@
                 </ion-select>
             </ion-item>
             <ion-item id="password" style="position: relative; padding:0px;">
-                <ion-label floating>LOCATION</ion-label>
-                <ion-input [formControl]="register.controls['location']" type="text" value="{{ location?.coords.latitude}} {{ location?.coords.longitude }}" readonly></ion-input>
+                <ion-label floating>LATITUDE</ion-label>
+                <ion-input [formControl]="register.controls['latitude']" type="text" value="{{this.latitude}}" readonly></ion-input>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>LONGITUDE</ion-label>
+                <ion-input [formControl]="register.controls['longitude']" type="text" value="{{this.longitude}}" readonly></ion-input>
             </ion-item>
 
             <!--

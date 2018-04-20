@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController ,Platform} from 'ionic-angular';
 import {AngularFireAuth} from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
 import { FormBuilder,FormGroup} from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Geolocation } from '@ionic-native/geolocation';
 
 
 
@@ -31,17 +32,21 @@ export class HomePage {
   public isbuttonselectede:boolean;
   
 public isPiecesSelected: boolean;
-private baseURI : string  = "http://localhost/vamsi/updateitems.php";
+private baseURIp : string  = "http://localhost/vamsi/reglocate.php";
+private baseURI : string  = "http://localhost/vamsi/itemretrive.php";
 private baseURIs : string  = "http://localhost/vamsi/updateitemk.php";
 id:number;
 recor:any;
+location:any;
+latitude:any;
+longitude:any;
 
  /* public listItems: any;*/
 
   
   
 
-  constructor(public navCtrl: NavController,private formBuilder:FormBuilder, public http: HttpClient,public navParams: NavParams,private fire:AngularFireAuth,private toast:ToastController) {
+  constructor(public navCtrl: NavController,private geolocation: Geolocation,public platform:Platform,private formBuilder:FormBuilder, public http: HttpClient,public navParams: NavParams,private fire:AngularFireAuth,private toast:ToastController) {
 
     this.isbuttonselecteda=false;
     this.isbuttonselectedb=false;
@@ -85,6 +90,49 @@ recor:any;
    
     this.registeritems.reset();
   }
+  mapUse(){
+    this.platform.ready().then(()=>{
+      let options={timeout:3000,enableHighAccuracy:true,maximumAge:0}
+  this.geolocation.getCurrentPosition(options).then((location) => {
+    console.log('Fetched the location successfully',location);
+    this.location=location;
+    this.latitude=location.coords.latitude;
+    this.longitude=location.coords.longitude;
+      this.saveEntr();
+  }).catch((error) => {
+    console.log('Error getting location', error);
+  });
+  });
+    }
+  saveEntr() : void
+  {
+     let latitude:number=this.latitude,
+        longitude:number=this.longitude;
+
+    
+        this.createEntr(latitude,longitude);
+  }
+  createEntr(latitude:number,longitude:number) : void
+{
+   let headers 	: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
+       options 	: any		= {"key":"create", "latitude":latitude,"longitude":longitude },
+       url       : any      	= this.baseURIp ;
+
+   this.http.post(url, JSON.stringify(options), headers)
+   .subscribe((data : any) =>
+   {
+      // If the request was successful notify the user
+   
+      console.log(`Congratulations the ${latitude} was successfully added`);
+      this.saveEntry();
+   },
+   (error : any) =>
+   {
+      console.log({error});
+   });
+}
+
+
 
   createEntry(EMAIL : string,weighta:number,piecesa:number,costa:number,weightb:number,piecesb:number,costb:number,weightc:number,piecesc:number,costc:number,weightd:number,piecesd:number,costd:number,weighte:number,piecese:number,coste:number,weightf:number,piecesf:number,costf:number,emailf:string) : void
   {
@@ -102,15 +150,15 @@ recor:any;
      },
      (error : any) =>
      {
-        console.log('Something went wrong!');
+        console.log({error});
      });
   }
 
 
-  registerEntry(name : string,weight:number,price:number) : void
+  registerEntry(name : string,weight:number,price:number,emailf:string) : void
   {
      let headers 	: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
-         options 	: any		= { "key" : "create", "name" : name, "weight" : weight,"price":price  },
+         options 	: any		= { "key" : "create", "name" : name, "weight" : weight,"price":price,"emailf":emailf },
          url       : any      	= this.baseURIs ;
 
      this.http.post(url, JSON.stringify(options), headers)
@@ -158,9 +206,10 @@ recor:any;
     else if( this.isKgsSelected){
       let name          : string = this.registeritems.controls["nameofitem"].value,
       weight  : number   = this.registeritems.controls["aq"].value,
-      price  : number   = this.registeritems.controls["price"].value  
+      price  : number   = this.registeritems.controls["price"].value,
+      emailf:string=this.navParams.data  
           
-      this.registerEntry(name,weight,price);
+      this.registerEntry(name,weight,price,emailf);
 
     }
   }

@@ -25,10 +25,11 @@ export class LoginssPage {
   lappy:any;
   latitude:any;
   dats:any;
+  
   public ionicNamedColor: string = 'primary';
   longitude:any;
   private baseURI : string  = "http://localhost/vamsi/tesss.php";
-  private baseURIp : string  = "http://localhost/vamsi/buys.php";
+  private baseURIp : string  = "http://localhost/vamsi/productdis.php";
   constructor(public navCtrl: NavController,private alertctrl:AlertController,private geolocation: Geolocation,public platform:Platform, public navParams: NavParams,public http   : HttpClient) {
     
   }
@@ -123,16 +124,33 @@ export class LoginssPage {
         console.log({error});
      });
   }
+
+
+  help():void{
+    this.http
+    .get('http://localhost/vamsi/productdis.php')
+    .subscribe((datak : any) =>
+    {
+       console.dir(datak);
+      
+       
+    },
+    (error : any) =>
+    {
+       console.dir(error);
+    });
+
+
+
+  }
   
   hello(itemy,i){
     this.ionicNamedColor = 'secondary';
     
     let index = this.itemsk.indexOf(itemy);
-    console.log(index);
     if(index > -1){
       this.dats=this.itemsk[index];
       let dat:string=this.dats.item;
-      console.log('the value is',dat);
       this.registeritem(dat);
     }
     
@@ -150,6 +168,7 @@ export class LoginssPage {
           // If the request was successful notify the user
        
           console.log(`Congratulations the ${dat} was successfully added`);
+          this.help();
          
        },
        (error : any) =>
